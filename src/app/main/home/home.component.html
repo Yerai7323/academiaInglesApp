@@ -1,1 +1,74 @@
-<p>home works!</p>
+
+<mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav mode="push">
+        <mat-toolbar color="primary">
+            <span>Menú</span>
+            <span class="spacer"></span>
+            <button mat-icon-button>
+                <mat-icon
+                    (click)="sidenav.toggle()">
+                    close
+                </mat-icon>
+            </button>
+        </mat-toolbar>
+
+        <mat-nav-list>
+            <a routerLink="/cursos"
+                mat-list-item
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>label</mat-icon>
+                <span>Cursos</span>
+            </a>
+
+            <a routerLink="/test"
+                mat-list-item
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>fact_check</mat-icon>
+                <span>Test</span>
+            </a>
+
+            <a routerLink="/conocenos"
+                mat-list-item
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>groups</mat-icon>
+                <span>Conócenos</span>
+            </a>
+
+            <a routerLink="/contacto"
+                mat-list-item
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon>contact_mail</mat-icon>
+                <span>Contacto</span>
+            </a>
+        </mat-nav-list>
+
+
+
+    </mat-sidenav>
+
+    <mat-toolbar color="primary">
+
+        <button mat-icon-button>
+            <mat-icon
+                (click)="sidenav.toggle()">
+                menu
+            </mat-icon>
+        </button>
+
+        <span class="spacer"></span> 
+        <h1>English Academy</h1>
+        <span class="spacer"></span> 
+
+        <button mat-button (click)="logout()">
+            Logout
+        </button>
+    </mat-toolbar>
+
+
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+    
+
+</mat-sidenav-container>
+
