@@ -6,6 +6,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
+import { environment } from '../environments/environment';
+//fire
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
 
 
 @NgModule({
@@ -17,6 +23,9 @@ import { AuthModule } from './auth/auth.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     AuthModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
     
   ],
   providers: [],

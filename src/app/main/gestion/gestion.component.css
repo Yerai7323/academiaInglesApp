@@ -1,0 +1,24 @@
+[fxFlex]:last-of-type{ 
+    margin-right: 20px; 
+}
+
+.gestion-card, .icon-edit, .icon-delete{
+    cursor: pointer;
+}
+
+.nuevoUsuarioCard{
+    max-width: 400px;
+}
+
+mat-card{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+button{
+    margin-top: 15px;
+}
+
+table {
+    width: 75%;
+}

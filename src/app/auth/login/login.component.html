@@ -79,7 +79,10 @@
             placeholder="Email"
             formControlName="email"
           />
-          <mat-icon color="primary" matSuffix *ngIf="loginForm.get('email')?.valid"
+          <mat-icon
+            color="primary"
+            matSuffix
+            *ngIf="loginForm.get('email')?.valid"
             >check_circle</mat-icon
           >
         </mat-form-field>
@@ -100,16 +103,16 @@
           >
         </mat-form-field>
 
-        <div class="form-group">
-          <button
-            mat-raised-button
-            color="warn"
-            type="submit"
-            [disabled]="loginForm.invalid"
-          >
-            Login
-          </button>
-        </div>
+        <span *ngIf="errorLogin" color="warn">Error en el usuario o la contraseña.</span>
+
+        <button
+          mat-raised-button
+          color="warn"
+          type="submit"
+          [disabled]="loginForm.invalid"
+        >
+          Login
+        </button>
       </form>
     </mat-card-content>
   </mat-card>

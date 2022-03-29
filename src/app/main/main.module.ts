@@ -8,17 +8,22 @@ import { RouterModule } from '@angular/router';
 import { TestsComponent } from './tests/tests.component';
 import { ConocenosComponent } from './conocenos/conocenos.component';
 import { ContactoComponent } from './contacto/contacto.component';
+import { GestionComponent } from './gestion/gestion.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
 
 @NgModule({
-  declarations: [HomeComponent, CursosComponent, TestsComponent, ConocenosComponent, ContactoComponent],
+  declarations: [HomeComponent, CursosComponent, TestsComponent, ConocenosComponent, ContactoComponent, GestionComponent],
   imports: [
     CommonModule,
     RouterModule,
+    ReactiveFormsModule,
     MainRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FlexLayoutModule
   ]
 })
 export class MainModule { }

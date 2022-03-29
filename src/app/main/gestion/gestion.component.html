@@ -1,0 +1,144 @@
+<div fxLayout="row wrap" fxLayoutGap="20" fxLayoutAlign="center">
+  <div
+    fxFlex.xs="60"
+    fxFlex.sm="35"
+    fxFlex.md="25"
+    fxFlex="20"
+    fxFlex.gt-lg="15"
+    *ngFor="let tipo of tiposGestion"
+  >
+    <mat-card (click)="mostrar(tipo.gestion)" class="gestion-card">
+      <img
+        mat-card-image
+        src="../../../assets/images/{{ tipo.image }}"
+        alt="{{ tipo.gestion }}"
+      />
+      <mat-card-content>
+        <h1>{{ tipo.gestion | uppercase }} USUARIOS</h1>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+
+<!-- LISTADO DE USUARIOS -->
+<div *ngIf="toggleListarCrear">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <table mat-table [dataSource]="usuarios" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="UID">
+        <th mat-header-cell *matHeaderCellDef> UID </th>
+        <td mat-cell *matCellDef="let element"> {{element.uid}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="NOMBRE">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="EMAIL">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ADMIN">
+        <th mat-header-cell *matHeaderCellDef> Admin </th>
+        <td mat-cell *matCellDef="let element"> {{element.admin}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="GESTIÓN">
+        <th mat-header-cell *matHeaderCellDef> Gestión </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon class="icon-edit" color="primary" (click)="editar( element.uid )">edit</mat-icon> 
+          <mat-icon class="icon-delete" color="warn" (click)="borrar( element.uid )">delete</mat-icon> 
+        </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>
+
+
+<!-- CREACIÓN USUARIO -->
+<div *ngIf="!toggleListarCrear">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <mat-card class="nuevoUsuarioCard">
+      <img
+        mat-card-image
+        src="../../../assets/images/crearUsuarioForm.png"
+        alt="login-card"
+      />
+      <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+        <form
+          [formGroup]="crearUsuarioForm"
+          fxLayout="column"
+          fxLayoutAlign="center center"
+        >
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input
+              matInput
+              type="text"
+              placeholder="Nombre"
+              formControlName="nombre"
+            />
+            <mat-icon
+              color="primary"
+              matSuffix
+              *ngIf="crearUsuarioForm.get('nombre')?.valid"
+              >check_circle</mat-icon
+            >
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Usuario</mat-label>
+            <input
+              matInput
+              type="email"
+              placeholder="Email"
+              formControlName="email"
+            />
+            <mat-icon
+              color="primary"
+              matSuffix
+              *ngIf="crearUsuarioForm.get('email')?.valid"
+              >check_circle</mat-icon
+            >
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input
+              matInput
+              type="password"
+              placeholder="*********"
+              formControlName="password"
+            />
+            <mat-icon
+              color="primary"
+              matSuffix
+              *ngIf="crearUsuarioForm.get('password')?.valid"
+              >check_circle</mat-icon
+            >
+          </mat-form-field>
+
+          <mat-checkbox color="warn" formControlName="admin">
+            Usuario Administrador
+          </mat-checkbox>
+
+          <button
+            mat-raised-button
+            color="warn"
+            type="button"
+            (click)="crearUsuario()"
+            [disabled]="crearUsuarioForm.invalid"
+          >
+            Crear Usuario
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

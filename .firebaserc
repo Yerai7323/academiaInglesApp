@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "academia-b45c0": {
+      "hosting": {
+        "academiaInglesApp": [
+          "academia-b45c0"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "academia-b45c0"
+  }
+}

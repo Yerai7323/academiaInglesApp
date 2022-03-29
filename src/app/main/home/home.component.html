@@ -16,29 +16,38 @@
             <a routerLink="/cursos"
                 mat-list-item
                 (click)="sidenav.toggle()">
-                <mat-icon mat-list-icon>label</mat-icon>
+                <mat-icon mat-list-icon color="primary">label</mat-icon>
                 <span>Cursos</span>
             </a>
 
             <a routerLink="/test"
                 mat-list-item
                 (click)="sidenav.toggle()">
-                <mat-icon mat-list-icon>fact_check</mat-icon>
+                <mat-icon mat-list-icon color="primary">fact_check</mat-icon>
                 <span>Test</span>
             </a>
 
             <a routerLink="/conocenos"
                 mat-list-item
                 (click)="sidenav.toggle()">
-                <mat-icon mat-list-icon>groups</mat-icon>
+                <mat-icon mat-list-icon color="primary">groups</mat-icon>
                 <span>Conócenos</span>
             </a>
 
             <a routerLink="/contacto"
                 mat-list-item
                 (click)="sidenav.toggle()">
-                <mat-icon mat-list-icon>contact_mail</mat-icon>
+                <mat-icon mat-list-icon color="primary">contact_mail</mat-icon>
                 <span>Contacto</span>
+            </a>
+
+            <a 
+                *ngIf="admin"
+                routerLink="/gestion"
+                mat-list-item
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icon color="warn">supervisor_account</mat-icon>
+                <span>Gestión</span>
             </a>
         </mat-nav-list>
 
@@ -58,6 +67,8 @@
         <span class="spacer"></span> 
         <h1>English Academy</h1>
         <span class="spacer"></span> 
+
+        <small>Hola, {{user}}</small>
 
         <button mat-button (click)="logout()">
             Logout
