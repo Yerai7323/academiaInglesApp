@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { ListarUsuariosService } from 'src/app/services/listar-usuarios.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -40,6 +38,7 @@ export class LoginComponent implements OnInit {
       .then((login) => {
         this.router.navigate(['/home']);
         this.errorLogin = false;
+        this.authService.initAuthListener()
       })
       .catch((err) => {
         this.errorLogin = true;

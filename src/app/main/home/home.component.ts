@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Usuario } from 'src/app/models/usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,24 +11,28 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  user:string = '';
-  userSubs!: Subscription;
+  user!:Usuario;
 
-  admin: boolean = false;
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private firestore: AngularFirestore,
   ) { }
 
   ngOnInit(): void {
     
-
-    //Pendiente de cambiar a subscripción
-    setTimeout(() => {
-      this.admin = this.authService.user.admin!;
-      this.user = this.authService.user.nombre!;
-    },1000);
+    this.authService.isAdmin().subscribe(fuser => {
+      if (fuser) {
+        this.firestore
+        .doc(`usuarios/${fuser.uid}`)
+        .valueChanges()
+        .subscribe( user=> {
+          const usuario = Usuario.fromFirebase(user)
+          this.user = usuario;
+        })
+      }
+    })
 
   }
 

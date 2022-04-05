@@ -6,7 +6,7 @@
     cursor: pointer;
 }
 
-.nuevoUsuarioCard{
+.nuevoCard{
     max-width: 400px;
 }
 
@@ -21,4 +21,9 @@ button{
 
 table {
     width: 75%;
+}
+
+hr{
+    width: 80%;
+    margin-bottom: 23px;
 }

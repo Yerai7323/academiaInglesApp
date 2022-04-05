@@ -18,7 +18,6 @@ export class AuthGuard implements CanLoad {
       tap((logado) => {
         if (!logado) {
           this.router.navigate(['/login']);
-          console.log(logado)
         }
       }),
       take(1)

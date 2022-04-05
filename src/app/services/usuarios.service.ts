@@ -7,8 +7,8 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class ListarUsuariosService {
-  constructor(private firestore: AngularFirestore,private authService: AuthService) {}
+export class UsuariosService {
+  constructor(private firestore: AngularFirestore) {}
 
   listarUsuarios():Observable<Usuario[]>{
     return this.firestore
@@ -25,7 +25,6 @@ export class ListarUsuariosService {
   }
 
   borrarUsuario( uidUsuario: string){
-    const uid = this.authService.user.uid;
     return this.firestore.doc(`usuarios/${uidUsuario}`).delete();
   }
 

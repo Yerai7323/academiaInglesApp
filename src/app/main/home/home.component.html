@@ -42,7 +42,7 @@
             </a>
 
             <a 
-                *ngIf="admin"
+                *ngIf="user && user.admin"
                 routerLink="/gestion"
                 mat-list-item
                 (click)="sidenav.toggle()">
@@ -68,7 +68,7 @@
         <h1>English Academy</h1>
         <span class="spacer"></span> 
 
-        <small>Hola, {{user}}</small>
+        <small *ngIf="user">Hola, {{user.nombre}}</small>
 
         <button mat-button (click)="logout()">
             Logout
