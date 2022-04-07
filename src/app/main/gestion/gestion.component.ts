@@ -5,8 +5,8 @@ import { Usuario } from 'src/app/models/usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CursosService } from 'src/app/services/cursos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
-import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-gestion',
@@ -18,9 +18,6 @@ export class GestionComponent implements OnInit {
   public usuarios: Usuario[] = [];
   public cursos: Curso[] = []; 
 
-
-  public dataSourceCursos: MatTableDataSource<Curso> | null  = null;
-  public dataSourceUsuarios: MatTableDataSource<Usuario> | null = null;
   columnasUsuarios: string[] = [
     'UID',
     'NOMBRE',
@@ -163,47 +160,5 @@ export class GestionComponent implements OnInit {
     console.log(uid);
   }
 
-  borrarUsuario(uid: string) {
-    Swal.fire({
-      title: '¿Estás seguro?',
-      text: 'Se borrará el usuario',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3F51B5',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Eliminar usuario',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.usuariosService.borrarUsuario(uid);
-        Swal.fire({
-          icon: 'success',
-          title: 'Eliminado!',
-          text: 'El usuario fue eliminado',
-          confirmButtonColor: '#3F51B5',
-        });
-      }
-    });
-  }
-
-  borrarCurso(uid: string) {
-    Swal.fire({
-      title: '¿Estás seguro?',
-      text: 'Se borrará el curso',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3F51B5',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Eliminar curso',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.cursosService.borrarCurso(uid);
-        Swal.fire({
-          icon: 'success',
-          title: 'Eliminado!',
-          text: 'El curso fue eliminado.',
-          confirmButtonColor: '#3F51B5',
-        });
-      }
-    });
-  }
+  
 }
