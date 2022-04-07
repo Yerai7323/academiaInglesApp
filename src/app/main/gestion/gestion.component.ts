@@ -1,71 +1,91 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Curso } from 'src/app/models/cursos.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CursosService } from 'src/app/services/cursos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-gestion',
   templateUrl: './gestion.component.html',
-  styleUrls: ['./gestion.component.css']
+  styleUrls: ['./gestion.component.css'],
 })
 export class GestionComponent implements OnInit {
+  public gestionMostrar: 'LU' | 'CU' | 'LC' | 'CC' | null = null;
+  public usuarios: Usuario[] = [];
+  public cursos: Curso[] = []; 
 
 
-
-  public gestionMostrar: 'LU' | 'CU' | 'LC' | 'CC' = 'LU';
-  public usuarios:Usuario[] = [];
-  public cursos:Curso[] = [];
-  displayedColumnsUsuarios: string[] = ['UID', 'NOMBRE', 'EMAIL', 'ADMIN', 'GESTIÓN'];
-  displayedColumnsCursos: string[] = ['UID', 'NOMBRE', 'DURACIÓN', 'PRECIO', 'GESTIÓN'];
+  public dataSourceCursos: MatTableDataSource<Curso> | null  = null;
+  public dataSourceUsuarios: MatTableDataSource<Usuario> | null = null;
+  columnasUsuarios: string[] = [
+    'UID',
+    'NOMBRE',
+    'EMAIL',
+    'ADMIN',
+    'GESTIÓN',
+  ];
+  columnasCursos: string[] = [
+    'UID',
+    'NOMBRE',
+    'DURACIÓN',
+    'PRECIO',
+    'GESTIÓN',
+  ];
   tiposGestion = [
     {
       gestion: 'listar usuarios',
-      image: 'listUsuarios.png'
+      image: 'listUsuarios.png',
     },
     {
       gestion: 'crear usuarios',
-      image: 'crearUsuario.png'
+      image: 'crearUsuario.png',
     },
     {
       gestion: 'listar cursos',
-      image: 'listUsuarios.png'
+      image: 'listCursos.png',
     },
     {
       gestion: 'crear cursos',
-      image: 'crearUsuario.png'
-    }
+      image: 'crearCurso.png',
+    },
   ];
 
-
-
   public crearUsuarioForm: FormGroup = this.fb.group({
-    nombre: ['', [Validators.required, Validators.minLength(3)] ],
+    nombre: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    admin: []
+    admin: [],
   });
-
-  
 
   public crearCursoForm: FormGroup = this.fb.group({
-    nombre: ['', [Validators.required, Validators.minLength(3)] ],
+    nombre: ['', [Validators.required, Validators.minLength(3)]],
     duracion: ['', [Validators.required]],
-    precio: ['', [Validators.required]]
+    precio: ['', [Validators.required]],
   });
 
-  constructor(private fb: FormBuilder,private authService: AuthService, private usuariosService:UsuariosService,private cursosService:CursosService) { }
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private usuariosService: UsuariosService,
+    private cursosService: CursosService
+  ) {}
 
   ngOnInit(): void {
-    this.usuariosService.listarUsuarios().subscribe(usuarios => this.usuarios = usuarios);
-    this.cursosService.listarCursos().subscribe(cursos => this.cursos = cursos);
+    this.usuariosService.listarUsuarios().subscribe((usuarios) => {
+      this.usuarios = usuarios;
+    });
+    this.cursosService.listarCursos().subscribe((cursos) => {
+        this.cursos = cursos;
+    }); 
   }
 
-  mostrar(tipo: string){
-    switch(tipo){
+  mostrar(tipo: string) {
+    switch (tipo) {
       case 'listar usuarios':
         this.gestionMostrar = 'LU';
         break;
@@ -83,15 +103,19 @@ export class GestionComponent implements OnInit {
     }
   }
 
-  crearUsuario(){
-    if(this.crearUsuarioForm.invalid){return}
+
+  crearUsuario() {
+    if (this.crearUsuarioForm.invalid) {
+      return;
+    }
 
     let { nombre, email, password, admin } = this.crearUsuarioForm.value;
     //Revisamos si el usuario es admin
-    admin === null ? admin = false : admin = true;
+    admin === null ? (admin = false) : (admin = true);
 
-    this.authService.addUsuario(nombre, email, password, admin)
-      .then( ok => {
+    this.authService
+      .addUsuario(nombre, email, password, admin)
+      .then((ok) => {
         Swal.fire({
           icon: 'success',
           title: 'Usuario Añadido',
@@ -106,15 +130,17 @@ export class GestionComponent implements OnInit {
         });
       });
 
-    this.crearUsuarioForm.reset()
-
+    this.crearUsuarioForm.reset();
   }
 
-  crearCurso(){
-    if(this.crearCursoForm.invalid){return}
+  crearCurso() {
+    if (this.crearCursoForm.invalid) {
+      return;
+    }
     let { nombre, duracion, precio } = this.crearCursoForm.value;
-    this.authService.addCurso(nombre, duracion, precio)
-      .then( ok => {
+    this.authService
+      .addCurso(nombre, duracion, precio)
+      .then((ok) => {
         Swal.fire({
           icon: 'success',
           title: 'Curso Añadido',
@@ -130,56 +156,54 @@ export class GestionComponent implements OnInit {
         });
       });
 
-    this.crearCursoForm.reset()
+    this.crearCursoForm.reset();
   }
 
-  editar(uid:string){
-    console.log(uid)
+  editar(uid: string) {
+    console.log(uid);
   }
 
-
-  borrarUsuario(uid:string){
+  borrarUsuario(uid: string) {
     Swal.fire({
       title: '¿Estás seguro?',
-      text: "Se borrará el usuario",
+      text: 'Se borrará el usuario',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3F51B5',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Eliminar usuario'
+      confirmButtonText: 'Eliminar usuario',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.usuariosService.borrarUsuario(uid)
+        this.usuariosService.borrarUsuario(uid);
         Swal.fire({
           icon: 'success',
           title: 'Eliminado!',
           text: 'El usuario fue eliminado',
           confirmButtonColor: '#3F51B5',
-        })
+        });
       }
-    })
+    });
   }
 
-  borrarCurso(uid:string){
+  borrarCurso(uid: string) {
     Swal.fire({
       title: '¿Estás seguro?',
-      text: "Se borrará el curso",
+      text: 'Se borrará el curso',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3F51B5',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Eliminar curso'
+      confirmButtonText: 'Eliminar curso',
     }).then((result) => {
       if (result.isConfirmed) {
         this.cursosService.borrarCurso(uid);
         Swal.fire({
           icon: 'success',
           title: 'Eliminado!',
-          text: 'El curso fue eliminado',
+          text: 'El curso fue eliminado.',
           confirmButtonColor: '#3F51B5',
-        })
+        });
       }
-    })
+    });
   }
-
 }

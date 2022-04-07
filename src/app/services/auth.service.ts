@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { doc, setDoc } from "firebase/firestore";
 import { map } from 'rxjs';
 import { Curso } from '../models/cursos.model';
 import { Usuario } from '../models/usuario.model';
-
 
 @Injectable({
   providedIn: 'root',
@@ -19,9 +17,8 @@ export class AuthService {
 
   constructor(
     public auth: AngularFireAuth,
-    private firestore: AngularFirestore,
+    private firestore: AngularFirestore
   ) {}
-
 
   loginUsuario(email: string, password: string) {
     return this.auth.signInWithEmailAndPassword(email, password);
@@ -31,9 +28,9 @@ export class AuthService {
   isAuth() {
     return this.auth.authState.pipe(map((fUser) => fUser != null));
   }
-  
-  isAdmin(){
-    return this.auth.authState
+
+  isAdmin() {
+    return this.auth.authState;
   }
 
   logOut() {
@@ -50,15 +47,15 @@ export class AuthService {
       });
   }
 
-  addCurso(nombre: string, duracion: string, precio: number) {
-    
-    
-    const newCurso = new Curso(nombre, duracion, precio);
+  addCurso(nombre: string, duracion: string, precio: number, uid: string = '') {
+    const newCurso = new Curso(nombre, duracion, precio, uid);
 
-    return  this.firestore.firestore.collection("cursos").add({...newCurso})
-    .then( fCurso => {
-      this.firestore.doc(`cursos/${fCurso.id}`).update({uid: fCurso.id})
-    })
+    return this.firestore.firestore
+      .collection('cursos')
+      .add({ ...newCurso })
+      .then((fCurso) => {
+        this.firestore.doc(`cursos/${fCurso.id}`).update({ uid: fCurso.id });
+      });
   }
 
   initAuthListener() {
@@ -76,6 +73,4 @@ export class AuthService {
       }
     });
   }
-
-  
 }

@@ -1,1 +1,21 @@
-<p>cursos works!</p>
+<div fxLayout="row wrap" fxLayoutGap="20" fxLayoutAlign="center">
+    <div
+      fxFlex.xs="60"
+      fxFlex.sm="35"
+      fxFlex.md="25"
+      fxFlex="20"
+      fxFlex.gt-lg="15"
+      *ngFor="let curso of cursos"
+    >
+      <mat-card (click)="mostrarCurso(curso.uid!)" class="gestion-card">
+        <img
+          mat-card-image
+          src="../../../assets/images/crearCursoForm.png"
+          alt="{{curso.nombre}}"
+        />
+        <mat-card-content>
+          <h1>{{ curso.nombre | uppercase }}</h1>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>

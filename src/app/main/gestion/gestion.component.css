@@ -8,6 +8,7 @@
 
 .nuevoCard{
     max-width: 400px;
+    margin-bottom: 50px;
 }
 
 mat-card{
@@ -19,11 +20,21 @@ button{
     margin-top: 15px;
 }
 
-table {
-    width: 75%;
-}
+
 
 hr{
     width: 80%;
     margin-bottom: 23px;
+}
+
+
+
+table, mat-paginator{
+  width: 75%;
+}
+.mat-cell {
+  padding: 8px 8px 8px 0;
+}
+.mat-form-field {
+  width: 70%;
 }
