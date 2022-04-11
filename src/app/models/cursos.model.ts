@@ -1,14 +1,15 @@
 export class Curso {
 
-    static fromFirebase( firebaseUser:any ){
-        return new Curso(firebaseUser.nombre, firebaseUser.duracion, firebaseUser.precio, firebaseUser.uid,)
+    static fromFirebase( firebaseCurso:any ){
+        return new Curso(firebaseCurso.nombre, firebaseCurso.duracion, firebaseCurso.precio, firebaseCurso.uid, firebaseCurso.descripcion)
     }
 
     constructor(
         public nombre: string,
         public duracion: string,
         public precio: number,
-        public uid?: string
+        public descripcion:string,
+        public uid?: string,
     ){}
 
 }

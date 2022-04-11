@@ -189,6 +189,23 @@
             >
           </mat-form-field>
 
+          <mat-form-field appearance="outline">
+            <mat-label>Descipción</mat-label>
+            <textarea
+              matInput
+              type="text"
+              placeholder="descripcion"
+              formControlName="descripcion"
+            >
+            </textarea>
+            <mat-icon
+              color="primary"
+              matSuffix
+              *ngIf="crearCursoForm.get('descripcion')?.valid"
+              >check_circle</mat-icon
+            >
+          </mat-form-field>
+
           <button
             mat-raised-button
             color="warn"

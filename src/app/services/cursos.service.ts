@@ -28,4 +28,9 @@ export class CursosService {
   borrarCurso( uidCurso: string){
     return this.firestore.doc(`cursos/${uidCurso}`).delete();
   }
+
+  buscarCurso(uidCurso:string){
+    return this.firestore.doc<Curso>(`cursos/${uidCurso}`).valueChanges();
+  }
 }
+ 

@@ -14,8 +14,17 @@
           alt="{{curso.nombre}}"
         />
         <mat-card-content>
-          <h1>{{ curso.nombre | uppercase }}</h1>
+          <h2>{{ curso.nombre | uppercase }}</h2>
+          <p>Duración: {{curso.duracion}}</p>
+          <p>Precio: {{curso.precio}}€</p>
         </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button 
+                  color="primary"
+                  [routerLink]="[ '/cursos', curso.uid ]">
+            Más info...
+          </button>
+        </mat-card-actions>
       </mat-card>
     </div>
   </div>

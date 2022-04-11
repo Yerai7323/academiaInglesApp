@@ -1,0 +1,12 @@
+<div *ngIf="curso">
+
+
+<p>curso:{{curso.nombre}}</p>
+<p>duraciún:{{curso.duracion}}</p>
+<p>precio:{{curso.precio}}</p>
+<p>uid:{{curso.uid}}</p>
+<p>descripción:</p>
+    <ul>
+        <li *ngFor="let desc of descripcion">{{desc}}</li>
+    </ul>
+</div>

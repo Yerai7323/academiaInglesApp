@@ -62,6 +62,7 @@ export class GestionComponent implements OnInit {
     nombre: ['', [Validators.required, Validators.minLength(3)]],
     duracion: ['', [Validators.required]],
     precio: ['', [Validators.required]],
+    descripcion: ['', [Validators.required]],
   });
 
 
@@ -134,9 +135,9 @@ export class GestionComponent implements OnInit {
     if (this.crearCursoForm.invalid) {
       return;
     }
-    let { nombre, duracion, precio } = this.crearCursoForm.value;
+    let { nombre, duracion, precio, descripcion } = this.crearCursoForm.value;
     this.authService
-      .addCurso(nombre, duracion, precio)
+      .addCurso(nombre, duracion, precio, descripcion)
       .then((ok) => {
         Swal.fire({
           icon: 'success',

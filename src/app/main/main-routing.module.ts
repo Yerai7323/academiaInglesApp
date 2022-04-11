@@ -7,6 +7,7 @@ import { ConocenosComponent } from './conocenos/conocenos.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { GestionComponent } from './gestion/gestion.component';
 import { AdminGuard } from '../services/admin.guard';
+import { DetallesComponent } from './detalles/detalles.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'cursos',
         component: CursosComponent
+      },
+      {
+        path: 'cursos/:uid',
+        component: DetallesComponent
       },
       {
         path: 'test',

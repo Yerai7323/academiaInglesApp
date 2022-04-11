@@ -42,14 +42,13 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then((fUser) => {
         const newUser = new Usuario(fUser.user?.uid!, nombre, email, admin);
-        console.log('newUser', newUser);
         this.firestore.doc(`usuarios/${fUser.user?.uid}`).set({ ...newUser });
       });
   }
 
-  addCurso(nombre: string, duracion: string, precio: number, uid: string = '') {
-    const newCurso = new Curso(nombre, duracion, precio, uid);
-
+  addCurso(nombre: string, duracion: string, precio: number, descripcion: string, uid: string = '') {
+    const newCurso = new Curso(nombre, duracion, precio, descripcion, uid);
+    console.log(newCurso)
     return this.firestore.firestore
       .collection('cursos')
       .add({ ...newCurso })
