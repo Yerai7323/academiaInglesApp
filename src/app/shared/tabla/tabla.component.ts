@@ -8,6 +8,7 @@ import { CursosService } from 'src/app/services/cursos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-tabla',
   templateUrl: './tabla.component.html',
@@ -44,6 +45,10 @@ export class TablaComponent implements OnInit, AfterViewInit {
 
   editar(uid: string){
 
+  }
+
+  resetPassword(email: string){
+    this.usuariosService.resetPassword(email);
   }
 
   //FILTRADO DE DATOS DE LA TABLA

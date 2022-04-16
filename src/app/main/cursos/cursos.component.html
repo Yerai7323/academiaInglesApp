@@ -7,16 +7,14 @@
       fxFlex.gt-lg="15"
       *ngFor="let curso of cursos"
     >
-      <mat-card (click)="mostrarCurso(curso.uid!)" class="gestion-card">
-        <img
-          mat-card-image
-          src="../../../assets/images/crearCursoForm.png"
-          alt="{{curso.nombre}}"
-        />
+      <mat-card class="gestion-card">
+        <mat-card-title mat-card-image fxLayout="row" fxLayoutAlign="center center" >
+          {{ curso.nombre | uppercase }}
+        </mat-card-title>
         <mat-card-content>
-          <h2>{{ curso.nombre | uppercase }}</h2>
+          <p>Nombre: {{ curso.nombre }}</p>
           <p>Duración: {{curso.duracion}}</p>
-          <p>Precio: {{curso.precio}}€</p>
+          <p>Precio: {{curso.precio}}€/mes</p>
         </mat-card-content>
         <mat-card-actions>
           <button mat-raised-button 

@@ -1,12 +1,22 @@
-<div *ngIf="curso">
-
-
-<p>curso:{{curso.nombre}}</p>
-<p>duraciún:{{curso.duracion}}</p>
-<p>precio:{{curso.precio}}</p>
-<p>uid:{{curso.uid}}</p>
-<p>descripción:</p>
-    <ul>
-        <li *ngFor="let desc of descripcion">{{desc}}</li>
+<div fxLayoutGap="30px" fxLayout="row" fxLayout.lt-md="column" *ngIf="curso">
+  <div
+    fxFlex="50"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    class="imagen"
+  >
+    <h1>{{ curso.nombre }}</h1>
+  </div>
+  <div *ngIf="curso" fxFlex="50" class="contenido">
+    <h2 class="tituloContenido">{{ curso.nombre }}</h2>
+    <mat-divider></mat-divider>
+    <p><b>Duración: </b>{{ curso.duracion }}</p>
+    <p><b>Precio: </b>{{ curso.precio }}€/mes</p>
+    <p><b>Descripción: </b></p>
+    <ul class="listaContenido">
+      <li *ngFor="let desc of descripcion">{{ desc }} </li>
     </ul>
+  </div>
 </div>
+
+añadir botón para volver atrás

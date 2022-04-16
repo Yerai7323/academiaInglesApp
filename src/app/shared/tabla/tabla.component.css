@@ -5,9 +5,12 @@ table{
 .mat-cell {
 padding: 8px 8px 8px 0;
 }
-.mat-form-field, mat-paginator {
-width: 100%;
+.mat-form-field{
+width: 25%;
 }
-.icon-edit, .icon-delete{
+mat-paginator {
+    width: 100%;
+}
+.icon-edit, .icon-delete, .icon-ressetPassword{
     cursor: pointer;
 }

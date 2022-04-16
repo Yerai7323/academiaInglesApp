@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -22,7 +23,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.authService.isAdmin().subscribe(fuser => {
+    this.authService.isAdmin()
+    .pipe(
+      take(1)
+    )
+    .subscribe(fuser => {
       if (fuser) {
         this.firestore
         .doc(`usuarios/${fuser.uid}`)
@@ -32,6 +37,7 @@ export class HomeComponent implements OnInit {
           this.user = usuario;
         })
       }
+
     })
 
   }
