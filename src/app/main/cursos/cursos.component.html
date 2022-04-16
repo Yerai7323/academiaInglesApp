@@ -1,28 +1,39 @@
-<div fxLayout="row wrap" fxLayoutGap="20" fxLayoutAlign="center">
-    <div
-      fxFlex.xs="60"
-      fxFlex.sm="35"
-      fxFlex.md="25"
-      fxFlex="20"
-      fxFlex.gt-lg="15"
-      *ngFor="let curso of cursos"
-    >
-      <mat-card class="gestion-card">
-        <mat-card-title mat-card-image fxLayout="row" fxLayoutAlign="center center" >
-          {{ curso.nombre | uppercase }}
-        </mat-card-title>
-        <mat-card-content>
-          <p>Nombre: {{ curso.nombre }}</p>
-          <p>Duración: {{curso.duracion}}</p>
-          <p>Precio: {{curso.precio}}€/mes</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-raised-button 
-                  color="primary"
-                  [routerLink]="[ '/cursos', curso.uid ]">
-            Más info...
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+<div
+  fxLayout="row wrap"
+  fxLayoutGap="20"
+  fxLayoutAlign="center"
+  class="listaCursos"
+>
+  <div
+    fxFlex.xs="60"
+    fxFlex.sm="35"
+    fxFlex.md="25"
+    fxFlex="20"
+    fxFlex.gt-lg="15"
+    *ngFor="let curso of cursos"
+  >
+    <mat-card class="gestion-card">
+      <mat-card-title
+        mat-card-image
+        fxLayout="row"
+        fxLayoutAlign="center center"
+      >
+        {{ curso.nombre | uppercase }}
+      </mat-card-title>
+      <mat-card-content>
+        <p>Nombre: {{ curso.nombre }}</p>
+        <p>Duración: {{ curso.duracion }}</p>
+        <p>Precio: {{ curso.precio }}€/mes</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          color="primary"
+          [routerLink]="['/cursos', curso.uid]"
+        >
+          Más info...
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </div>
+</div>

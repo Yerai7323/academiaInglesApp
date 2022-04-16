@@ -22,12 +22,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
-    this.authService.isAdmin()
-    .pipe(
-      take(1)
-    )
-    .subscribe(fuser => {
+    this.authService.isAdmin().subscribe(fuser => {
       if (fuser) {
         this.firestore
         .doc(`usuarios/${fuser.uid}`)
@@ -37,9 +32,7 @@ export class HomeComponent implements OnInit {
           this.user = usuario;
         })
       }
-
     })
-
   }
 
   logout(){

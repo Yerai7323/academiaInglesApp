@@ -10,7 +10,7 @@ export class CursosService {
 
   constructor(private firestore: AngularFirestore) { }
 
-
+  //Método que devuelve un array de los Cursos de Firestore
   listarCursos():Observable<Curso[]>{
     return this.firestore
       .collection<Curso>(`cursos`)
@@ -25,10 +25,12 @@ export class CursosService {
       );
   }
 
+  //Buscamos un curso mediante su UID y lo eliminamos
   borrarCurso( uidCurso: string){
     return this.firestore.doc(`cursos/${uidCurso}`).delete();
   }
 
+  //Buscamos un Curso mediante su UID y devolvemos sus campos
   buscarCurso(uidCurso:string){
     return this.firestore.doc<Curso>(`cursos/${uidCurso}`).valueChanges();
   }

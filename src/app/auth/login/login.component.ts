@@ -35,14 +35,16 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.loginForm.value;
     this.authService
       .loginUsuario(email, password)
-      .then((login) => {
+       .then((login) => {
         this.router.navigate(['/home']);
         this.errorLogin = false;
-        this.authService.initAuthListener()
+        //this.authService.initAuthListener()
       })
       .catch((err) => {
         this.errorLogin = true;
-      });
+      }); 
+
+      
   }
 
 }

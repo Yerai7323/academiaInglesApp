@@ -1,0 +1,27 @@
+.cabecera{
+    font-size:3em;
+    margin-top: 35px;
+}
+hr{
+    width: 80%;
+    border: 1px solid red;
+}
+.container{
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+mat-card{
+    min-height: 100px;
+    width: 100%;
+}
+
+mat-card-title{
+    font-size:1.4em;
+}
+mat-card-content{
+    margin-top: 15px;
+}

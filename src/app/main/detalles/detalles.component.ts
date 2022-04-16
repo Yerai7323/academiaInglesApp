@@ -19,11 +19,11 @@ export class DetallesComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.activatedroute.params
-    .pipe(
+    //Cogemos el UID del curso a través de la ruta en la que nos encontramos
+    //Una vez tenemos el UID buscamos nuestro curso por ese UID y cargamos el contenido
+    this.activatedroute.params.pipe(
       switchMap( ({uid}) => this.cursosService.buscarCurso(uid) )
-    )
-    .subscribe( curso => {
+    ).subscribe( curso => {
       if(curso){
         this.curso = curso;
         this.descripcion = curso.descripcion.split('/');
