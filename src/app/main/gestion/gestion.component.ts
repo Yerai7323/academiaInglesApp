@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Curso } from 'src/app/models/cursos.model';
 import { Usuario } from 'src/app/models/usuario.model';
-import { AuthService } from 'src/app/services/auth.service';
 import { CursosService } from 'src/app/services/cursos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import Swal from 'sweetalert2';
@@ -15,23 +14,6 @@ import Swal from 'sweetalert2';
 })
 export class GestionComponent implements OnInit {
   public gestionMostrar: 'LU' | 'CU' | 'LC' | 'CC' | null = null;
-  public usuarios: Usuario[] = [];
-  public cursos: Curso[] = []; 
-
-  columnasUsuarios: string[] = [
-    'UID',
-    'NOMBRE',
-    'EMAIL',
-    'ADMIN',
-    'GESTIÓN',
-  ];
-  columnasCursos: string[] = [
-    'UID',
-    'NOMBRE',
-    'DURACIÓN',
-    'PRECIO',
-    'GESTIÓN',
-  ];
   tiposGestion = [
     {
       gestion: 'listar usuarios',
@@ -51,6 +33,29 @@ export class GestionComponent implements OnInit {
     },
   ];
 
+
+  public usuarios: Usuario[] = [];
+  public cursos: Curso[] = []; 
+
+  //Columnas tabla Usuarios
+  columnasUsuarios: string[] = [
+    'UID',
+    'NOMBRE',
+    'EMAIL',
+    'ADMIN',
+    'GESTIÓN',
+  ];
+  //Columnas tabla Curso
+  columnasCursos: string[] = [
+    'UID',
+    'NOMBRE',
+    'DURACIÓN',
+    'PRECIO',
+    'GESTIÓN',
+  ];
+  
+
+  //Formulario creación Usuario
   public crearUsuarioForm: FormGroup = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
@@ -58,6 +63,7 @@ export class GestionComponent implements OnInit {
     admin: [],
   });
 
+  //Formulario creación curso
   public crearCursoForm: FormGroup = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(3)]],
     duracion: ['', [Validators.required]],
@@ -68,20 +74,22 @@ export class GestionComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
     private usuariosService: UsuariosService,
     private cursosService: CursosService
   ) {}
 
   ngOnInit(): void {
+    //Cargamos los usuarios
     this.usuariosService.listarUsuarios().subscribe((usuarios) => {
       this.usuarios = usuarios;
     });
+    //Cargamos los cursos
     this.cursosService.listarCursos().subscribe((cursos) => {
         this.cursos = cursos;
     }); 
   }
 
+  //Método que determina que vamos a mostrar
   mostrar(tipo: string) {
     switch (tipo) {
       case 'listar usuarios':
@@ -102,6 +110,7 @@ export class GestionComponent implements OnInit {
   }
 
 
+  //Creación de usuario desde el Formulario
   crearUsuario() {
     if (this.crearUsuarioForm.invalid) {
       return;
@@ -111,7 +120,7 @@ export class GestionComponent implements OnInit {
     //Revisamos si el usuario es admin
     admin === null ? (admin = false) : (admin = true);
 
-    this.authService
+    this.usuariosService
       .addUsuario(nombre, email, password, admin)
       .then((ok) => {
         Swal.fire({
@@ -131,12 +140,13 @@ export class GestionComponent implements OnInit {
     this.crearUsuarioForm.reset();
   }
 
+  //Creación de curso desde el formulario
   crearCurso() {
     if (this.crearCursoForm.invalid) {
       return;
     }
     let { nombre, duracion, precio, descripcion } = this.crearCursoForm.value;
-    this.authService
+    this.cursosService
       .addCurso(nombre, duracion, precio, descripcion)
       .then((ok) => {
         Swal.fire({

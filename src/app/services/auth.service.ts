@@ -5,7 +5,6 @@ import { take } from 'rxjs';
 import { map } from 'rxjs';
 import { Curso } from '../models/cursos.model';
 import { Usuario } from '../models/usuario.model';
-import { UsuariosService } from './usuarios.service';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +20,6 @@ export class AuthService {
   constructor(
     public auth: AngularFireAuth,
     private firestore: AngularFirestore,
-    private usuariosService: UsuariosService
   ) {}
 
   //Método que recibe los datos del formulario de logado (emial / password)
@@ -47,30 +45,6 @@ export class AuthService {
     return this.auth.signOut();
   }
 
-  //Creamos el usuario con los campos nombre, email, password y admin, tras esta creación
-  //obtenemos el UID autogenerado por Firebase y creamos un objeto Usuario con dichos campos
-  //una vez creado el objeto, se inserta el Firestore con su UID
-  addUsuario(nombre: string, email: string, password: string, admin: boolean) {
-    return this.auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((fUser) => {
-        const newUser = new Usuario(fUser.user?.uid!, nombre, email, admin);
-        this.firestore.doc(`usuarios/${fUser.user?.uid}`).set({ ...newUser });
-      });
-  }
-
-  //Creamos un curso con todos sus campos, dejando el UID por defecto vacío, una vez creado el curso
-  //rescatamos el UID autogenerado por Firebase y actualizamos su documento añadiendo dicho UID al objeto
-  addCurso(nombre: string, duracion: string, precio: number, descripcion: string, uid: string = '') {
-    const newCurso = new Curso(nombre, duracion, precio, descripcion, uid);
-    return this.firestore.firestore
-      .collection('cursos')
-      .add({ ...newCurso })
-      .then((fCurso) => {
-        this.firestore.doc(`cursos/${fCurso.id}`).update({ uid: fCurso.id });
-      });
-  }
-
 
   /* initAuthListener() {
     this.auth.authState.subscribe((fuser) => {
@@ -88,3 +62,15 @@ export class AuthService {
     });
   } */
 }
+
+
+
+
+/*
+
+EDICION CURSO/USUARIO
+TEST
+
+RESET PASSWORD AL CREAR USUARIO??
+
+*/

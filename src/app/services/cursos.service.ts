@@ -25,6 +25,18 @@ export class CursosService {
       );
   }
 
+  //Creamos un curso con todos sus campos, dejando el UID por defecto vacío, una vez creado el curso
+  //rescatamos el UID autogenerado por Firebase y actualizamos su documento añadiendo dicho UID al objeto
+  addCurso(nombre: string, duracion: string, precio: number, descripcion: string, uid: string = '') {
+    const newCurso = new Curso(nombre, duracion, precio, descripcion, uid);
+    return this.firestore.firestore
+      .collection('cursos')
+      .add({ ...newCurso })
+      .then((fCurso) => {
+        this.firestore.doc(`cursos/${fCurso.id}`).update({ uid: fCurso.id });
+      });
+  }
+
   //Buscamos un curso mediante su UID y lo eliminamos
   borrarCurso( uidCurso: string){
     return this.firestore.doc(`cursos/${uidCurso}`).delete();

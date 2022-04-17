@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -10,7 +9,7 @@ import { AuthService } from './services/auth.service';
 export class AppComponent {
 
   constructor( private authService: AuthService){
-    //this.authService.logOut();
+    this.authService.logOut();
     //this.authService.initAuthListener(); 
   }
 }

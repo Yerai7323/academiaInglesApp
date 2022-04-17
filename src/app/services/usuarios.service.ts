@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { find, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Usuario } from '../models/usuario.model';
-import { AdminGuard } from './admin.guard';
+
 
 
 
@@ -26,6 +26,19 @@ export class UsuariosService {
           });
         })
       );
+  }
+
+  //Creamos el usuario con los campos nombre, email, password y admin, tras esta creación
+  //obtenemos el UID autogenerado por Firebase y creamos un objeto Usuario con dichos campos
+  //una vez creado el objeto, se inserta el Firestore con su UID
+  addUsuario(nombre: string, email: string, password: string, admin: boolean) {
+    return this.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((fUser) => {
+        const newUser = new Usuario(fUser.user?.uid!, nombre, email, admin);
+        this.firestore.doc(`usuarios/${fUser.user?.uid}`).set({ ...newUser });
+        this.resetPassword(email);
+      });
   }
 
 
