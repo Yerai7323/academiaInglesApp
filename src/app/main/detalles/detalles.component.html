@@ -1,4 +1,4 @@
-<div fxLayoutGap="30px" fxLayout="row" fxLayout.lt-md="column" *ngIf="curso" >
+<div fxLayoutGap="30px" fxLayout="row" fxLayout.lt-md="column" *ngIf="curso">
   <div
     fxFlex="50"
     fxLayout="column"
@@ -14,9 +14,11 @@
     <p><b>Precio: </b>{{ curso.precio }}€/mes</p>
     <p><b>Descripción: </b></p>
     <ul class="listaContenido">
-      <li *ngFor="let desc of descripcion">{{ desc }} </li>
+      <li *ngFor="let desc of descripcion">{{ desc }}</li>
     </ul>
   </div>
 </div>
 
-<button mat-raised-button color="warn" routerLink="/cursos">Volver al listado</button>
+<button mat-raised-button color="warn" routerLink="/cursos">
+  Volver al listado
+</button>

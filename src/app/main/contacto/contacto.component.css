@@ -1,0 +1,30 @@
+.container{
+    margin-top: 100px;
+}
+mat-icon{
+    transform: scale(3);
+    color: #3f51b5;
+}
+img{
+    max-width: 70%;
+}
+hr{
+    width: 80%;
+    border: 1px solid red;
+    margin-top: 0px;
+}
+.contact{
+    background-color: #3f51b5;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px 5px rgba(0,0,0,0.35);
+    padding: 15px;
+    width: 80%;
+    margin-bottom: 25px;
+}
+.contact h1{
+    margin-bottom: 0px;
+}
+.contact p{
+    margin-top: 20px;
+}

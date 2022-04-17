@@ -1,97 +1,128 @@
 <div *ngIf="datosCursos.length > 0" class="contenedor">
-<mat-form-field appearance="standard">
+  <mat-form-field appearance="standard">
     <mat-label>Buscar</mat-label>
-    <input matInput (keyup)="filtroTabla($event)" #input>
+    <input matInput (keyup)="filtroTabla($event)" #input />
   </mat-form-field>
 
-  <table  mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
     <ng-container matColumnDef="UID">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="uid"> UID </th>
-      <td mat-cell *matCellDef="let element"> {{element.uid}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="uid">UID</th>
+      <td mat-cell *matCellDef="let element">{{ element.uid }}</td>
     </ng-container>
 
     <ng-container matColumnDef="NOMBRE">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="nombre"> Nombre </th>
-      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="nombre">Nombre</th>
+      <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
     </ng-container>
 
     <ng-container matColumnDef="DURACIÓN">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="duracion"> Duración </th>
-      <td mat-cell *matCellDef="let element"> {{element.duracion}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="duracion">
+        Duración
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.duracion }}</td>
     </ng-container>
 
     <ng-container matColumnDef="PRECIO">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="precio"> Precio </th>
-      <td mat-cell *matCellDef="let element"> {{element.precio}}€ </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="precio">Precio</th>
+      <td mat-cell *matCellDef="let element">{{ element.precio }}€</td>
     </ng-container>
 
     <ng-container matColumnDef="GESTIÓN">
-      <th mat-header-cell *matHeaderCellDef> Gestión </th>
+      <th mat-header-cell *matHeaderCellDef>Gestión</th>
       <td mat-cell *matCellDef="let element">
-        <mat-icon class="icon-edit" color="primary" (click)="editar( element.uid )">edit</mat-icon> 
-        <mat-icon class="icon-delete" color="warn" (click)="borrarCurso( element.uid )">delete</mat-icon> 
+        <mat-icon
+          class="icon-edit"
+          color="primary"
+          (click)="editar(element.uid)"
+          >edit</mat-icon
+        >
+        <mat-icon
+          class="icon-delete"
+          color="warn"
+          (click)="borrarCurso(element.uid)"
+          >delete</mat-icon
+        >
       </td>
     </ng-container>
-  
+
     <tr mat-header-row *matHeaderRowDef="columnas"></tr>
-    <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnas"></tr>
 
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">No se han encontrado ningun registro. '{{input.value}}'</td>
+      <td class="mat-cell" colspan="4">
+        No se han encontrado ningun registro. '{{ input.value }}'
+      </td>
     </tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page of users"
+  ></mat-paginator>
 </div>
 
-
 <div *ngIf="datosUsuarios.length > 0" class="contenedor">
+  <mat-form-field appearance="standard">
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="filtroTabla($event)" #input />
+  </mat-form-field>
 
-    <mat-form-field appearance="standard">
-        <mat-label>Buscar</mat-label>
-        <input matInput (keyup)="filtroTabla($event)" #input>
-      </mat-form-field>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    <ng-container matColumnDef="UID">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="uid">UID</th>
+      <td mat-cell *matCellDef="let element">{{ element.uid }}</td>
+    </ng-container>
 
-    <table  mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+    <ng-container matColumnDef="NOMBRE">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="nombre">Nombre</th>
+      <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="UID">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="uid"> UID </th>
-          <td mat-cell *matCellDef="let element"> {{element.uid}} </td>
-        </ng-container>
-    
-        <ng-container matColumnDef="NOMBRE">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="nombre"> Nombre </th>
-          <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-        </ng-container>
-    
-        <ng-container matColumnDef="EMAIL">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="email"> Email </th>
-          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-        </ng-container>
-    
-        <ng-container matColumnDef="ADMIN">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="admin"> Admin </th>
-          <td mat-cell *matCellDef="let element"> {{element.admin}} </td>
-        </ng-container>
-    
-        <ng-container matColumnDef="GESTIÓN">
-          <th mat-header-cell *matHeaderCellDef> Gestión </th>
-          <td mat-cell *matCellDef="let element">
-            <mat-icon class="icon-ressetPassword" color="warn" (click)="resetPassword( element.email )">how_to_reg</mat-icon>
-            <mat-icon class="icon-edit" color="primary" (click)="editar( element.uid )">edit</mat-icon> 
-            <mat-icon class="icon-delete" color="warn" (click)="borrarUsuario( element.uid )">delete</mat-icon> 
-            
-          </td>
-        </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="columnas"></tr>
-        <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
-    
-        <tr class="mat-row" *matNoDataRow>
-          <td class="mat-cell" colspan="4">No se han encontrado ningun registro. '{{input.value}}'</td>
-        </tr>
-      </table>
-    
-    
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    <ng-container matColumnDef="EMAIL">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="email">Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="ADMIN">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="admin">Admin</th>
+      <td mat-cell *matCellDef="let element">{{ element.admin }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="GESTIÓN">
+      <th mat-header-cell *matHeaderCellDef>Gestión</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-icon
+          class="icon-ressetPassword"
+          color="warn"
+          (click)="resetPassword(element.email)"
+          >how_to_reg</mat-icon
+        >
+        <mat-icon
+          class="icon-edit"
+          color="primary"
+          (click)="editar(element.uid)"
+          >edit</mat-icon
+        >
+        <mat-icon
+          class="icon-delete"
+          color="warn"
+          (click)="borrarUsuario(element.uid)"
+          >delete</mat-icon
+        >
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        No se han encontrado ningun registro. '{{ input.value }}'
+      </td>
+    </tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page of users"
+  ></mat-paginator>
 </div>
