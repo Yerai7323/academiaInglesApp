@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map, Observable } from 'rxjs';
-import { Curso } from '../models/cursos.model';
+import { Curso } from '../models/curso.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CursosService {
-
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore) {}
 
   //Método que devuelve un array de los Cursos de Firestore
-  listarCursos():Observable<Curso[]>{
+  listarCursos(): Observable<Curso[]> {
     return this.firestore
       .collection<Curso>(`cursos`)
       .snapshotChanges()
@@ -27,7 +26,13 @@ export class CursosService {
 
   //Creamos un curso con todos sus campos, dejando el UID por defecto vacío, una vez creado el curso
   //rescatamos el UID autogenerado por Firebase y actualizamos su documento añadiendo dicho UID al objeto
-  addCurso(nombre: string, duracion: string, precio: number, descripcion: string, uid: string = '') {
+  addCurso(
+    nombre: string,
+    duracion: string,
+    precio: number,
+    descripcion: string,
+    uid: string = ''
+  ) {
     const newCurso = new Curso(nombre, duracion, precio, descripcion, uid);
     return this.firestore.firestore
       .collection('cursos')
@@ -38,13 +43,12 @@ export class CursosService {
   }
 
   //Buscamos un curso mediante su UID y lo eliminamos
-  borrarCurso( uidCurso: string){
+  borrarCurso(uidCurso: string) {
     return this.firestore.doc(`cursos/${uidCurso}`).delete();
   }
 
   //Buscamos un Curso mediante su UID y devolvemos sus campos
-  buscarCurso(uidCurso:string){
+  buscarCurso(uidCurso: string) {
     return this.firestore.doc<Curso>(`cursos/${uidCurso}`).valueChanges();
   }
 }
- 

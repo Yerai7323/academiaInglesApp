@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Curso } from 'src/app/models/cursos.model';
+import { Curso } from 'src/app/models/curso.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { CursosService } from 'src/app/services/cursos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -56,9 +56,10 @@ export class GestionComponent implements OnInit {
   
 
   //Formulario creación Usuario
+  public emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"
   public crearUsuarioForm: FormGroup = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(3)]],
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     admin: [],
   });

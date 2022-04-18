@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { take } from 'rxjs';
 import { map } from 'rxjs';
-import { Curso } from '../models/cursos.model';
+import { Curso } from '../models/curso.model';
 import { Usuario } from '../models/usuario.model';
 
 @Injectable({
@@ -64,13 +64,3 @@ export class AuthService {
 }
 
 
-
-
-/*
-
-EDICION CURSO/USUARIO
-TEST
-
-RESET PASSWORD AL CREAR USUARIO??
-
-*/

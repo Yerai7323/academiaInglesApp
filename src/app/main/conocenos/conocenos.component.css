@@ -1,3 +1,4 @@
+
 .cabecera{
     font-size:3em;
     margin-top: 35px;
@@ -22,6 +23,7 @@ hr{
     padding: 15px;
     min-height: 100px;
     width: 100%;
+    margin-top: 20px;
 }
 .valor p {
     margin-top: 15px;
@@ -30,7 +32,7 @@ hr{
 img{
     max-width: 80%;
 }
-.somos{
+.somos, .profesores{
     background-color: #3f51b5;
     color: #fff;
     border-radius: 10px;
@@ -38,6 +40,7 @@ img{
     padding: 15px;
     width: 80%;
     margin-bottom: 25px;
+    margin-right: 25px;
 }
 .somos h1, .valor h1{
     margin-bottom: 0px;
@@ -45,3 +48,4 @@ img{
 .somos p, .valor p{
     margin-top: 20px;
 }
+

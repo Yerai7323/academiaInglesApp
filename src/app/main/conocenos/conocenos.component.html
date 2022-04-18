@@ -5,68 +5,36 @@
 
 <div
   class="container"
-  fxLayout="row"
+  fxLayout="row wrap"
   fxLayoutAlign="space-evenly center"
-  fxLayoutGap="20"
   fxLayout.lt-md="column"
 >
-  <div fxFlex.gt-sm="33" fxFlex.lt-md="100" class="valor">
-    <h1 fxLayoutAlign="center center">Responsabilidad</h1>
+  <div
+    *ngFor="let valor of valores"
+    class="valor"
+    fxFlex.gt-sm="30"
+    fxFlex.lt-md="100"
+  >
+    <h1 fxLayoutAlign="center center">{{ valor.titulo }}</h1>
     <hr />
-    <p>La responsabilidad del equipo es el éxito de los alumnos.</p>
-  </div>
-  <div fxFlex.gt-sm="33" fxFlex.lt-md="100" class="valor">
-    <h1 fxLayoutAlign="center center">Ética profesional</h1>
-    <hr />
-    <p>Actuamos con integridad, profesionalidad y respeto a las personas.</p>
-  </div>
-  <div fxFlex.gt-sm="33" fxFlex.lt-md="100" class="valor">
-    <h1 fxLayoutAlign="center center">Trabajo en equipo</h1>
-    <hr />
-    <p>Fomentamos la participación de todos los integrantes de la academia.</p>
-  </div>
-</div>
-
-<div
-  class="container"
-  fxLayout="row"
-  fxLayoutAlign="space-evenly center"
-  fxLayoutGap="20"
-  fxLayout.lt-md="column"
->
-  <div fxFlex.gt-sm="33" fxFlex.lt-md="100" class="valor">
-    <h1 fxLayoutAlign="center center">Innovación</h1>
-    <hr />
-    <p>Informados de las últimas metodologías de enseñanza y aprendizaje.</p>
-  </div>
-  <div fxFlex.gt-sm="33" fxFlex.lt-md="100" class="valor">
-    <h1 fxLayoutAlign="center center">Respeto</h1>
-    <hr />
-    <p>
-      El respeto entre todos es la clave para un ambiente positivo y productivo.
-    </p>
-  </div>
-  <div fxFlex.gt-sm="33" fxFlex.lt-md="100" class="valor">
-    <h1 fxLayoutAlign="center center">Entusiasmo</h1>
-    <hr />
-    <p>Nos apasiona lo que hacemos, contagiamos a los clientes y alumnos.</p>
+    <p>{{ valor.texto }}</p>
   </div>
 </div>
 
 <div
   fxLayout="row"
-  fxLayoutAlign="space-evenly center"
+  fxLayoutAlign="center center"
   fxLayoutGap="20"
   fxLayout.lt-md="column"
 >
   <img
-    fxFlex.gt-sm="50"
+    fxFlex.gt-sm="40"
     fxFlex.lt-md="100"
     src="../../../assets/images/conocenos.png"
     alt="conocenos"
   />
 
-  <div fxFlex.gt-sm="30" fxFlex.lt-md="80" class="somos">
+  <div fxFlex.gt-sm="35" class="somos">
     <h1 fxLayoutAlign="center center">¿Quiénes somos?</h1>
     <hr />
     <p>
@@ -80,5 +48,39 @@
       bajo la misma filosofía: enseñar el idioma de forma práctica y eficaz bajo
       los más altos criterios de calidad.
     </p>
+  </div>
+</div>
+
+<h1 fxLayout="row" fxLayoutAlign="center center" class="cabecera">
+  Nuestros profesores
+</h1>
+<hr />
+
+<div
+  class="container"
+  fxLayout="row wrap"
+  fxLayoutAlign="space-evenly center"
+  fxLayout.lt-md="column"
+>
+  <div
+    *ngFor="let profesor of profesores"
+    class="profesores"
+    fxFlex.gt-sm="40"
+    fxFlex.lt-md="100"
+  >
+    <h1 fxLayoutAlign="center center">
+      {{ profesor.nombre }} {{ profesor.apellidos }}
+    </h1>
+    <hr />
+    <div fxLayoutAlign="center center">
+      <img
+        src="{{ '../../../assets/images/' + profesor.imagen }}"
+        alt="{{ profesor.nombre }}"
+        class="profeImagen"
+      />
+    </div>
+    <div>
+      {{ profesor.descripcion }}
+    </div>
   </div>
 </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
-import { Curso } from 'src/app/models/cursos.model';
+import { Curso } from 'src/app/models/curso.model';
 import { CursosService } from 'src/app/services/cursos.service';
 
 @Component({
