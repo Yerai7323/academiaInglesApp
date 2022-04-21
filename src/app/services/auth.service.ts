@@ -3,7 +3,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { take } from 'rxjs';
 import { map } from 'rxjs';
-import { Curso } from '../models/curso.model';
 import { Usuario } from '../models/usuario.model';
 
 @Injectable({
@@ -46,7 +45,8 @@ export class AuthService {
   }
 
 
-  /* initAuthListener() {
+  //Cargamos los los datos del usuario logado de forma global en la aplicación
+  initAuthListener() {
     this.auth.authState.subscribe((fuser) => {
       if (fuser) {
         this.firestore
@@ -59,8 +59,8 @@ export class AuthService {
       } else {
         this._user = null;
       }
-    });
-  } */
+  });
+} 
 }
 
 

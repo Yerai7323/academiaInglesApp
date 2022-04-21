@@ -41,6 +41,10 @@ export class UsuariosService {
       });
   }
 
+  //Buscamos un Curso mediante su UID y devolvemos sus campos
+  buscarUsuario(uidUsuario: string) {
+    return this.firestore.doc<Usuario>(`usuarios/${uidUsuario}`).valueChanges();
+  }
 
   //Buscamos un Usuario mediante su UID y lo eliminamos de Firebase
   borrarUsuario( uidUsuario: string){
@@ -49,7 +53,15 @@ export class UsuariosService {
 
   //Envíamos el email de reseteo de password al usuario
   resetPassword( email: string ){
-    this.auth.sendPasswordResetEmail(email)
+    this.auth.sendPasswordResetEmail(email);
   }
+
+  //Edicion de un usuario
+  editarUsuario(uid: string, nombre: string, admin:boolean ) {
+    this.firestore.doc(`usuarios/${uid}`).update({nombre, admin});
+  }
+
+
+    
 
 }

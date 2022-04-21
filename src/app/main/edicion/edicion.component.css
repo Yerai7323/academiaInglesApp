@@ -1,0 +1,32 @@
+.container{
+    min-width: 450px;
+}
+.cabecera{
+    font-size:3em;
+    margin-top: 35px;
+}
+hr{
+    width: 80%;
+    border: 1px solid red;
+    margin-top: 0px;
+}
+
+form{
+    
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px 5px rgba(0,0,0,0.35);
+    padding: 15px;
+    margin-top: 30px;
+}
+
+img{
+    max-width: 350px;
+}
+.aviso{
+    color:red;
+}
+
+.resetPassDiv{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

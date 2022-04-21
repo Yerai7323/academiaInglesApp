@@ -8,6 +8,7 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { GestionComponent } from './gestion/gestion.component';
 import { AdminGuard } from '../services/admin.guard';
 import { DetallesComponent } from './detalles/detalles.component';
+import { EdicionComponent } from './edicion/edicion.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,14 @@ const routes: Routes = [
         path: 'gestion',
         canLoad: [AdminGuard],
         component: GestionComponent
+      },
+      {
+        path: 'edicion/usuario/:uid',
+        component: EdicionComponent
+      },
+      {
+        path: 'edicion/curso/:uid',
+        component: EdicionComponent
       },
       {
         path: '**',

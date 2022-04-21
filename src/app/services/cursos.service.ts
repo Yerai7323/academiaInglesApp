@@ -51,4 +51,12 @@ export class CursosService {
   buscarCurso(uidCurso: string) {
     return this.firestore.doc<Curso>(`cursos/${uidCurso}`).valueChanges();
   }
+
+
+  //Edicion de un curso
+  editarCurso(uid: string, nombre: string, duracion: string, precio: number, descripcion: string ) {
+    this.firestore.doc(`cursos/${uid}`).update({nombre, duracion, precio, descripcion});
+  }
+
+
 }

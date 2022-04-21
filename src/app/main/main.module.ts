@@ -13,12 +13,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TablaComponent } from '../shared/tabla/tabla.component';
 import { DetallesComponent } from './detalles/detalles.component';
+import { EdicionComponent } from './edicion/edicion.component';
 
 
 
 
 @NgModule({
-  declarations: [HomeComponent, CursosComponent, TestsComponent, ConocenosComponent, ContactoComponent, GestionComponent, TablaComponent, DetallesComponent],
+  declarations: [HomeComponent, CursosComponent, TestsComponent, ConocenosComponent, ContactoComponent, GestionComponent, TablaComponent, DetallesComponent, EdicionComponent],
   imports: [
     CommonModule,
     RouterModule,

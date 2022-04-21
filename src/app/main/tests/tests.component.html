@@ -1,1 +1,23 @@
-<p>tests works!</p>
+respuestas correctas: {{respuestasCorrectas}}
+<form [formGroup]="preguntasForm">
+
+    <div *ngFor="let pregunta of preguntas; let i = index">
+        <label> {{pregunta.pregunta}}</label>
+        <br>
+        <mat-radio-group formControlName="pregunta{{i}}">
+            <mat-radio-button value={{pregunta.soluciones[0]}} >{{pregunta.respuestas[0]}}</mat-radio-button> 
+            <mat-radio-button value={{pregunta.soluciones[1]}} >{{pregunta.respuestas[1]}}</mat-radio-button> 
+            <mat-radio-button value={{pregunta.soluciones[2]}} >{{pregunta.respuestas[2]}}</mat-radio-button> 
+        </mat-radio-group>
+    </div>
+
+    <button
+        mat-raised-button
+        color="warn"
+        type="button"
+        (click)="comprobarForm()"
+        [disabled]="preguntasForm.invalid"
+    >
+        Comprobar
+    </button>
+</form> 

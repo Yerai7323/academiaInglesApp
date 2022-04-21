@@ -1,0 +1,148 @@
+<div *ngIf="tipoEdicion !== null" class="container">
+
+  <div *ngIf="curso">
+    <h1 fxLayout="row" fxLayoutAlign="center center" class="cabecera">Editar Curso</h1>
+    <hr>
+    <div fxLayout="row" fxLayoutAlign="center center" class="form">
+      <div  fxFlex="80">
+        <form
+          fxLayout="column"
+          autocomplete="off"
+          [formGroup]="editarCursoForm"
+        >
+        <div fxLayoutAlign="center center">
+          <img
+            src="../../../assets/images/editCurso.png"
+            alt="edición curso"
+          />
+        </div>
+        
+          <mat-form-field appearance="legacy">
+            <mat-label>Nombre</mat-label>
+            <input
+              matInput
+              type="text"
+              placeholder="Nombre"
+              formControlName="nombre"
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy">
+            <mat-label>Duración</mat-label>
+            <input
+              matInput
+              type="text"
+              placeholder="Duración"
+              formControlName="duracion"
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy">
+            <mat-label>Precio</mat-label>
+            <input
+              matInput
+              type="number"
+              min="0"
+              placeholder="Precio"
+              formControlName="precio"
+            />
+          </mat-form-field>
+
+          
+          <p class="aviso">Separar los párrafos por '/'</p>
+          <mat-form-field appearance="outline">
+            <mat-label>Descripción</mat-label>
+            <textarea
+              rows="10"
+              matInput
+              type="text"
+              placeholder="descripcion"
+              formControlName="descripcion"
+            >
+            </textarea>
+          </mat-form-field>
+
+          <div fxLayoutGap="15" fxFlex="column">
+            <button mat-raised-button color="primary" fxFlex="100" (click)="actualizarCurso()">
+              <mat-icon>edit</mat-icon>
+              Guardar cambios
+            </button>
+
+            <button mat-raised-button color="warn" fxFlex="100" (click)="eliminarCurso()">
+              <mat-icon>delete</mat-icon>
+              Eliminar curso
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div *ngIf="usuario">
+    <h1 fxLayout="row" fxLayoutAlign="center center" class="cabecera">Editar Usuario</h1>
+    <hr>
+    <div fxLayout="row" fxLayoutAlign="center center" class="form">
+      <div  fxFlex="80">
+        <form
+          fxLayout="column"
+          autocomplete="off"
+          [formGroup]="editarUsuarioForm"
+        >
+        <div fxLayoutAlign="center center">
+          <img
+            src="../../../assets/images/editUsuario.png"
+            alt="edición usuario"
+          />
+        </div>
+        
+          <mat-form-field appearance="legacy">
+            <mat-label>Nombre</mat-label>
+            <input
+              matInput
+              type="text"
+              placeholder="Nombre"
+              formControlName="nombre"
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              type="text"
+              placeholder="Email"
+              formControlName="email"
+            />
+          </mat-form-field>
+
+          <mat-checkbox color="warn" formControlName="admin">
+            Usuario Administrador
+          </mat-checkbox>
+
+          <div fxFlex="40" class="resetPassDiv">
+            <button mat-raised-button color="primary"  (click)="resetContrasenia()">
+              <mat-icon>how_to_reg</mat-icon>
+              Reset Password
+            </button>
+          </div>
+          
+          <div fxLayoutGap="15" fxFlex="column" >
+            <button mat-raised-button color="primary" fxFlex="50" (click)="actualizarUsuario()">
+              <mat-icon>edit</mat-icon>
+              Guardar cambios
+            </button>
+
+            <button mat-raised-button color="warn" fxFlex="50" (click)="eliminarUsuario()">
+              <mat-icon>delete</mat-icon>
+              Eliminar usuario
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</div>

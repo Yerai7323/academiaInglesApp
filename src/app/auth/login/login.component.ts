@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  public emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+  public emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
   public errorLogin:boolean = false;
 
   public loginForm: FormGroup = this.fb.group({
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
        .then((login) => {
         this.router.navigate(['/home']);
         this.errorLogin = false;
-        //this.authService.initAuthListener()
+        this.authService.initAuthListener()
       })
       .catch((err) => {
         this.errorLogin = true;

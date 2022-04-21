@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Curso } from 'src/app/models/curso.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { CursosService } from 'src/app/services/cursos.service';
@@ -26,7 +27,7 @@ export class TablaComponent implements OnInit, AfterViewInit {
 
   public dataSource!: MatTableDataSource<any>
 
-  constructor(private cursosService:CursosService, private usuariosService:UsuariosService) { }
+  constructor(private cursosService:CursosService, private usuariosService:UsuariosService, private router: Router) { }
 
   ngOnInit(): void {
     //SE REVISA QUE TABLA VAMOS A MOSTRAR PARA CARGAR SUS DATOS
@@ -43,8 +44,12 @@ export class TablaComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  editar(uid: string){
+  editarUsuario(uid: string){
+    this.router.navigate(['/edicion/usuario', uid]);
+  }
 
+  editarCurso(uid: string){
+    this.router.navigate(['/edicion/curso', uid]);
   }
 
   resetPassword(email: string){
