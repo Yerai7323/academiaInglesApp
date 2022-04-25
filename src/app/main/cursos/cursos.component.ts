@@ -14,10 +14,7 @@ export class CursosComponent implements OnInit {
   constructor(private cursosService:CursosService) { }
 
   ngOnInit(): void {
-
     //Realizamos la carga de cursos al iniciar el componente
     this.cursosService.listarCursos().subscribe( cursos => {this.cursos = cursos} )
   }
-
-
 }

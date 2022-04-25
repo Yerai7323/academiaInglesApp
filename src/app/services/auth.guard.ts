@@ -13,6 +13,7 @@ export class AuthGuard implements CanLoad {
     private router: Router
   ){}
 
+  //Comprobamos si el usuario está logado antes de mostar los distintos componentes del Main
   canLoad(): Observable<boolean> {
     return this.authService.isAuth().pipe(
       tap((logado) => {

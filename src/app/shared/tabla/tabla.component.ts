@@ -17,7 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class TablaComponent implements OnInit, AfterViewInit {
 
-  //DATOS OBTENIDOS MEDIANTE LOS INPUT
+  //Datos obtenidos mediante los Inputs (obtenemos los datos del componente padre)
   @Input() datosUsuarios!: Usuario[];
   @Input() datosCursos!: Curso[];
   @Input() columnas!: string[];
@@ -30,7 +30,8 @@ export class TablaComponent implements OnInit, AfterViewInit {
   constructor(private cursosService:CursosService, private usuariosService:UsuariosService, private router: Router) { }
 
   ngOnInit(): void {
-    //SE REVISA QUE TABLA VAMOS A MOSTRAR PARA CARGAR SUS DATOS
+    //Se revisa que input contiene los datos para saber si tenemos que mostar
+    //la tabla de cursos o la de usuarios.
     if(this.datosUsuarios.length > 0){
       this.dataSource = new MatTableDataSource(this.datosUsuarios);
     }else{
@@ -39,31 +40,29 @@ export class TablaComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    //UNA VEZ TENGAMOS LA TABLA LE AÑADIMOS EL PAGINADO Y EL ORDENADO
+    //Una vez hemos cargado la tabla le añadimos el paginado y los filtros de ordenación
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
+  //Nos redirige a la edición del usuario seleccionado.
   editarUsuario(uid: string){
     this.router.navigate(['/edicion/usuario', uid]);
   }
 
+  //Nos redirige a la edición del curso seleccionado.
   editarCurso(uid: string){
     this.router.navigate(['/edicion/curso', uid]);
   }
 
-  resetPassword(email: string){
-    this.usuariosService.resetPassword(email);
-  }
-
-  //FILTRADO DE DATOS DE LA TABLA
+  //Filtrado de datos de la tabla mediante el buscador
   filtroTabla(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource!.filter = filterValue.trim().toLowerCase();
   }
 
 
-  //ELIMINACIÓN USUARIO CON CONFIRMACIÓN
+  //Eliminación de usuario con confirmación
   borrarUsuario(uid: string) {
     Swal.fire({
       title: '¿Estás seguro?',
@@ -91,7 +90,7 @@ export class TablaComponent implements OnInit, AfterViewInit {
     });
   }
 
-  //ELIMINACIÓN CURSO CON CONFIRMACIÓN
+  //Eliminación de usuario con confirmación
   borrarCurso(uid: string) {
     console.log(this.datosCursos)
     Swal.fire({

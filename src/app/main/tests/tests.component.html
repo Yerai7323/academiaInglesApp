@@ -1,23 +1,68 @@
-respuestas correctas: {{respuestasCorrectas}}
-<form [formGroup]="preguntasForm">
+<div fxLayout="column" 
+    fxLayoutAlign="space-between stretch" 
+    fxFlex="60" 
+    fxFlex.lt-lg="70" 
+    fxFlex.lt-md="80" 
+    class="container"
+    *ngIf="!testFinalizado"
+    >
 
-    <div *ngFor="let pregunta of preguntas; let i = index">
-        <label> {{pregunta.pregunta}}</label>
-        <br>
-        <mat-radio-group formControlName="pregunta{{i}}">
-            <mat-radio-button value={{pregunta.soluciones[0]}} >{{pregunta.respuestas[0]}}</mat-radio-button> 
-            <mat-radio-button value={{pregunta.soluciones[1]}} >{{pregunta.respuestas[1]}}</mat-radio-button> 
-            <mat-radio-button value={{pregunta.soluciones[2]}} >{{pregunta.respuestas[2]}}</mat-radio-button> 
-        </mat-radio-group>
+    <form [formGroup]="preguntasForm" >
+
+        <div *ngFor="let pregunta of test; let i = index">
+            <div *ngIf="i===preguntaActual">
+                <h3>{{i+1}}. {{pregunta.pregunta}}</h3>
+                <br>
+                <mat-radio-group formControlName="pregunta{{i+1}}" fxLayout="column">
+                    <mat-radio-button value={{pregunta.solucion[0]}} color="warn">{{pregunta.respuestas[0]}}</mat-radio-button> 
+                    <mat-radio-button value={{pregunta.solucion[1]}} color="warn">{{pregunta.respuestas[1]}}</mat-radio-button> 
+                    <mat-radio-button value={{pregunta.solucion[2]}} color="warn">{{pregunta.respuestas[2]}}</mat-radio-button> 
+                </mat-radio-group>
+            </div>
+        </div>
+        
+        <div class="buttonsContainer"  >
+            <div fxLayout="column" fxLayoutAlign="center stretch">
+                <button  mat-raised-button  color="warn" (click)="siguiente()" [disabled]="preguntaActual === 14" >Siguiente</button>
+                <button  mat-raised-button color="warn" (click)="anterior()" [disabled]="preguntaActual === 0" >Anterior</button>
+                <button  mat-raised-button color="basic" (click)="comprobarForm()" *ngIf="preguntaActual === 14 && preguntasForm.valid" >Obtener resultados</button>
+            </div>
+        </div>
+        <p class="aviso" *ngIf="preguntasForm.invalid" >*Necesitas contestar todas las preguntas para obtener el resultado.</p>
+    </form> 
+</div>
+
+
+<div fxLayout="column" 
+    fxLayoutAlign="space-between stretch" 
+    fxFlex="60" 
+    fxFlex.lt-lg="70" 
+    fxFlex.lt-md="80" 
+    class="container"
+    *ngIf="testFinalizado"
+    >
+
+    <div fxLayout="column" fxLayoutAlign="start center">
+        <h1  class="cabecera">Resultados</h1>
+        <hr>
+    </div>
+    <div fxLayoutAlign="center center" fxLayout="column">
+        <p>Has acertado {{respuestasCorrectas}} de {{totalPreguntas}}.</p>
+        <p>Tienes un nivel de Inglés: <b>{{nivelIngles}}</b></p>
+        <p>Revisa los cursos de los que disponemos y apuntaté al que más se adapte a tu nivel.</p>
     </div>
 
-    <button
-        mat-raised-button
-        color="warn"
-        type="button"
-        (click)="comprobarForm()"
-        [disabled]="preguntasForm.invalid"
-    >
-        Comprobar
-    </button>
-</form> 
+    
+    <div fxLayoutAlign="center stretch">
+        <button
+            class="volverCursos"
+            mat-raised-button  
+            color="warn" 
+            [routerLink]="['/cursos']"
+        >
+            Revisar los cursos
+        </button>
+    </div>
+</div>
+
+

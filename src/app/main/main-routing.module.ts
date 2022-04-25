@@ -37,7 +37,7 @@ const routes: Routes = [
       },
       {
         path: 'gestion',
-        canLoad: [AdminGuard],
+        canActivate: [AdminGuard],
         component: GestionComponent
       },
       {

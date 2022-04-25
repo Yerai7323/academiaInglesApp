@@ -1,0 +1,47 @@
+.container{
+    background-color: #3f51b5;
+    color: #fff;
+    border-radius: 10px;
+    margin:auto;
+    margin-top: 45px;
+    min-height: 450px;
+    box-shadow: 2px 2px 8px 5px rgba(0,0,0,0.35);
+}
+form{
+    margin:20px;
+}
+h3{
+    font-size: 1.7em;
+
+}
+mat-radio-button{
+    margin: 10px;
+}
+
+.buttonsContainer{
+    margin-top: 80px;
+}
+.buttonsContainer button{
+    margin: 5px
+}
+
+.aviso{
+    margin: 5px;
+    color:#fff;
+    font-size:smaller;
+}
+
+.cabecera{
+    font-size:3em;
+    margin-top: 35px;
+}
+hr{
+    width: 80%;
+    border: 1px solid red;
+    margin-top: 0px;
+}
+
+.volverCursos{
+    margin-bottom: 50px;
+    width: 80%;
+}

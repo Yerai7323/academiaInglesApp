@@ -13,6 +13,13 @@ import Swal from 'sweetalert2';
   styleUrls: ['./gestion.component.css'],
 })
 export class GestionComponent implements OnInit {
+
+  //Gestionamos los distintos tipos de vistas que podemos tener en este componente,
+  //dependiendo de que opción seleccione el usuario, temos las siguientes opciones:
+  //LU -> listar usuarios
+  //CU -> crear usuarios
+  //LC -> listar cursos
+  //CC -> crear cursos
   public gestionMostrar: 'LU' | 'CU' | 'LC' | 'CC' | null = null;
   tiposGestion = [
     {
@@ -65,10 +72,11 @@ export class GestionComponent implements OnInit {
   });
 
   //Formulario creación curso
+  public precioPattern = "^[0-9]{1,3}$"
   public crearCursoForm: FormGroup = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(3)]],
     duracion: ['', [Validators.required]],
-    precio: ['', [Validators.required]],
+    precio: ['', [Validators.required, Validators.pattern(this.precioPattern)]],
     descripcion: ['', [Validators.required]],
   });
 
@@ -143,17 +151,26 @@ export class GestionComponent implements OnInit {
 
   //Creación de curso desde el formulario
   crearCurso() {
+    let { nombre, duracion, precio, descripcion } = this.crearCursoForm.value;
+
+    //Revisamos si el formulario se ha cumplimentado de forma correcta
     if (this.crearCursoForm.invalid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Curso no añadido',
+        text: 'Revisa los campos del formulario.',
+        confirmButtonColor: '#3F51B5',
+      });
       return;
     }
-    let { nombre, duracion, precio, descripcion } = this.crearCursoForm.value;
+    
     this.cursosService
       .addCurso(nombre, duracion, precio, descripcion)
       .then((ok) => {
         Swal.fire({
           icon: 'success',
           title: 'Curso Añadido',
-          text: 'Cursocreado con éxito.',
+          text: 'Curso creado con éxito.',
           confirmButtonColor: '#3F51B5',
         });
       })
@@ -168,9 +185,7 @@ export class GestionComponent implements OnInit {
     this.crearCursoForm.reset();
   }
 
-  editar(uid: string) {
-    console.log(uid);
-  }
+
 
   
 }
