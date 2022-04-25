@@ -17,10 +17,11 @@ export class EdicionComponent implements OnInit {
 
 
   //Formulario para la edición de los cursos
+  public precioPattern = "^[0-9]{1,3}$"
   public editarCursoForm: FormGroup = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(3)]],
     duracion: ['', [Validators.required]],
-    precio: ['', [Validators.required]],
+    precio: ['', [Validators.required, Validators.pattern(this.precioPattern)]],
     descripcion: ['', [Validators.required]],
   });
 
