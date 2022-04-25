@@ -15,6 +15,6 @@ export class ContactoComponent implements OnInit {
 
   ngOnInit(): void {
     //Realizamos la carga de los Valores al iniciar el componente
-    this.metodosContactoService.listarMetodosContacto().subscribe( metodosContacto => {this.metodosContacto = metodosContacto; console.log(metodosContacto)} )
+    this.metodosContactoService.listarMetodosContacto().subscribe( metodosContacto => {this.metodosContacto = metodosContacto;} )
   }
 }

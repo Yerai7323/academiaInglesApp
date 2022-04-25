@@ -63,7 +63,6 @@ export class EdicionComponent implements OnInit {
       ).subscribe( usuario => {
         if(usuario){
           this.usuario = usuario;
-          console.log(this.usuario)
           this.editarUsuarioForm.patchValue(this.usuario)
         }
       });

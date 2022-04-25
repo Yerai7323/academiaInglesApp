@@ -92,7 +92,6 @@ export class TablaComponent implements OnInit, AfterViewInit {
 
   //Eliminación de usuario con confirmación
   borrarCurso(uid: string) {
-    console.log(this.datosCursos)
     Swal.fire({
       title: '¿Estás seguro?',
       text: 'Se borrará el curso',
