@@ -47,7 +47,9 @@ export class AuthService {
 
   //Cargamos los los datos del usuario logado de forma global en la aplicación
   initAuthListener() {
-    this.auth.authState.subscribe((fuser) => {
+    this.auth.authState.pipe(
+      take(1)
+    ).subscribe((fuser) => {
       if (fuser) {
         this.firestore
           .doc(`usuarios/${fuser.uid}`)
